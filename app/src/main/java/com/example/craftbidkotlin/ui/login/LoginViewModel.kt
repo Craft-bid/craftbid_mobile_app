@@ -1,16 +1,19 @@
 package com.example.craftbidkotlin.ui.login
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import androidx.lifecycle.AndroidViewModel
 import com.example.craftbidkotlin.data.LoginRepository
 import com.example.craftbidkotlin.data.Result
 
 import com.example.craftbidkotlin.R
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
-
+class LoginViewModel(private val loginRepository: LoginRepository, application: Application) : AndroidViewModel(application) {
+    private val sharedPreferences = application.getSharedPreferences("UserLoginPreferences", Context.MODE_PRIVATE)
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -22,10 +25,16 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {
+            setLoggedIn(true)
             _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }
+    }
+
+    fun logout() {
+        loginRepository.logout()
+        setLoggedIn(false)
     }
 
     fun loginDataChanged(username: String, password: String) {
@@ -50,5 +59,13 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
+    }
+
+    fun isLoggedIn(): Boolean {
+        return sharedPreferences.getBoolean("isLoggedIn", false)
+    }
+
+    fun setLoggedIn(value: Boolean) {
+        sharedPreferences.edit().putBoolean("isLoggedIn", value).apply()
     }
 }

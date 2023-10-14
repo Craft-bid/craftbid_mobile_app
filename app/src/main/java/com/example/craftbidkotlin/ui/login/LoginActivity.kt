@@ -1,6 +1,8 @@
 package com.example.craftbidkotlin.ui.login
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import com.example.craftbidkotlin.MainActivity
 import com.example.craftbidkotlin.databinding.ActivityLoginBinding
 
 import com.example.craftbidkotlin.R
@@ -32,7 +35,7 @@ private lateinit var binding: ActivityLoginBinding
         val login = binding.login
         val loading = binding.loading
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(application))
             .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
@@ -107,6 +110,20 @@ private lateinit var binding: ActivityLoginBinding
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
+
+        // Navigate to MainActivity after successful login
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+
+        // Optionally, if you don't want the user to navigate back to the LoginActivity when pressing the back button:
+        finish()
+    }
+
+    private fun saveUserLoggedInStatus(isLoggedIn: Boolean) {
+        val sharedPreferences = getSharedPreferences("UserLoginPreferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("IS_USER_LOGGED_IN", isLoggedIn)
+        editor.apply()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
