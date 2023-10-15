@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.plcoding.daggerhiltcourse"
-        minSdk 21
+        minSdk 28
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -73,5 +73,7 @@ dependencies {
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.3"
 }

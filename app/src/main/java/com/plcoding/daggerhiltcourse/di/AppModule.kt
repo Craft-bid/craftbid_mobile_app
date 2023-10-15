@@ -1,14 +1,19 @@
 package com.plcoding.daggerhiltcourse.di
 
-import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import com.plcoding.daggerhiltcourse.data.CRAFT_BID_BASE_URL
+import com.plcoding.daggerhiltcourse.data.ServiceInterceptor
+import com.plcoding.daggerhiltcourse.data.remote.AuthApi
 import com.plcoding.daggerhiltcourse.data.remote.MyApi
-import com.plcoding.daggerhiltcourse.data.repository.MyRepositoryImpl
-import com.plcoding.daggerhiltcourse.domain.repository.MyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -18,12 +23,38 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMyApi(): MyApi {
+    fun provideMyApi(serviceInterceptor: ServiceInterceptor): MyApi {
         return Retrofit.Builder()
-            .baseUrl("https://test.com")
+            .baseUrl(CRAFT_BID_BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(serviceInterceptor)
+                    .build())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MyApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(): AuthApi {
+        return Retrofit.Builder()
+            .baseUrl(CRAFT_BID_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AuthApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideServiceInterceptor(sharedPreferences: SharedPreferences): ServiceInterceptor =
+        ServiceInterceptor(sharedPreferences)
+
+    @Singleton
+    @Provides
+    fun sharedPref(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences("JWT_AUTH_TOKEN", Context.MODE_PRIVATE)
+
 
     @Provides
     @Singleton

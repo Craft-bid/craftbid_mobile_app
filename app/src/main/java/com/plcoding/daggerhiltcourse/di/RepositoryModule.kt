@@ -1,6 +1,8 @@
 package com.plcoding.daggerhiltcourse.di
 
+import com.plcoding.daggerhiltcourse.data.repository.AuthRepositoryImpl
 import com.plcoding.daggerhiltcourse.data.repository.MyRepositoryImpl
+import com.plcoding.daggerhiltcourse.domain.repository.AuthRepository
 import com.plcoding.daggerhiltcourse.domain.repository.MyRepository
 import dagger.Binds
 import dagger.Module
@@ -17,4 +19,10 @@ abstract class RepositoryModule {
     abstract fun bindMyRepository(
         myRepositoryImpl: MyRepositoryImpl
     ): MyRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        authRepositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
 }

@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.IBinder
 import com.plcoding.daggerhiltcourse.domain.repository.MyRepository
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -15,6 +17,16 @@ class MyService: Service() {
 
     override fun onCreate() {
         super.onCreate()
+        println("Essa")
+        essa()
+
+    }
+
+    fun essa() {
+        GlobalScope.launch {
+            val response = repository.doNetworkCall()
+            println(response)
+        }
     }
 
     override fun onBind(p0: Intent?): IBinder? {
