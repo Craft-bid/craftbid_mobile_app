@@ -33,14 +33,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         println(hello)
         GlobalScope.launch {
-            if (authRepository.getToken() == null) {
-                val result: ResponseResult<LoggedInUser> =
-                    authRepository.login("elon@gmail.com", "elonNowak")
-                if (result is ResponseResult.Success) {
-                    println(result.data)
-                    sharedPreferences.edit().putString(CRAFT_BID_JWT_TOKEN, result.data.token)
-                        .apply()
-                }
+            val result: ResponseResult<LoggedInUser> =
+                authRepository.login("elon@gmail.com", "elonNowak")
+            if (result is ResponseResult.Success) {
+                println(result.data)
+                sharedPreferences.edit().putString(CRAFT_BID_JWT_TOKEN, result.data.token)
+                    .apply()
             }
 
             val response = myRepository.doNetworkCall()
