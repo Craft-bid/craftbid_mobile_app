@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.plcoding.craftbidapp"
+        applicationId "com.pl.craftbidapp"
         minSdk 28
         targetSdk 33
         versionCode 1
