@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.plcoding.daggerhiltcourse"
+        applicationId "com.plcoding.craftbidapp"
         minSdk 28
         targetSdk 33
         versionCode 1
@@ -37,6 +37,7 @@ android {
     buildFeatures {
         compose true
         viewBinding true
+        dataBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
