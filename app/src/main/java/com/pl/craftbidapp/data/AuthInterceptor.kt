@@ -5,7 +5,8 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class ServiceInterceptor @Inject constructor(
+// dodaje token do nagłówka zapytania API
+class AuthInterceptor @Inject constructor(
     private val sharedPreferences: SharedPreferences,
 ) : Interceptor {
 

@@ -3,7 +3,7 @@ package com.pl.craftbidapp.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.pl.craftbidapp.data.CRAFT_BID_BASE_URL
-import com.pl.craftbidapp.data.ServiceInterceptor
+import com.pl.craftbidapp.data.AuthInterceptor
 import com.pl.craftbidapp.data.remote.AuthApi
 import com.pl.craftbidapp.data.remote.MyApi
 import dagger.Module
@@ -23,12 +23,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMyApi(serviceInterceptor: ServiceInterceptor): MyApi {
+    fun provideMyApi(authInterceptor: AuthInterceptor): MyApi {
         return Retrofit.Builder()
             .baseUrl(CRAFT_BID_BASE_URL)
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(serviceInterceptor)
+                    .addInterceptor(authInterceptor)
                     .build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -47,8 +47,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideServiceInterceptor(sharedPreferences: SharedPreferences): ServiceInterceptor =
-        ServiceInterceptor(sharedPreferences)
+    fun provideServiceInterceptor(sharedPreferences: SharedPreferences): AuthInterceptor =
+        AuthInterceptor(sharedPreferences)
 
     @Singleton
     @Provides
