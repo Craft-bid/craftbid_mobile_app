@@ -9,4 +9,6 @@ interface AuthRepository {
     fun getToken(): String?
 
     fun saveToken(token: String)
+
+    fun logout()
 }

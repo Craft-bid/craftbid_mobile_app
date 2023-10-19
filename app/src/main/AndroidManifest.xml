@@ -25,7 +25,7 @@
             android:name="com.pl.craftbidapp.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.CraftBidAppTheme">
+            android:theme="@style/Theme.CraftBidKotlin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
