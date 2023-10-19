@@ -14,15 +14,14 @@
         android:theme="@style/Theme.CraftBidAppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.pl.craftbidapp.MainActivity2"
+            android:name="com.pl.craftbidapp.MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main2"
+            android:label="@string/title_activity_main"
 
             android:theme="@style/Theme.CraftBidKotlin">
-
         </activity>
         <activity
-            android:name="com.pl.craftbidapp.MainActivity"
+            android:name="com.pl.craftbidapp.LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CraftBidKotlin">

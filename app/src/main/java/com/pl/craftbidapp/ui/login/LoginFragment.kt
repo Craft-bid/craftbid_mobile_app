@@ -1,6 +1,5 @@
 package com.pl.craftbidapp.ui.login
 
-import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +17,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.pl.craftbidapp.MainActivity
-import com.pl.craftbidapp.MainActivity2
 import com.pl.craftbidapp.R
 import com.pl.craftbidapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,7 +81,7 @@ class LoginFragment @Inject constructor(): Fragment() {
             }
 
             // todo check how to resolve it with fragments
-            val intent = Intent(activity, MainActivity2::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             activity?.finish()
 
