@@ -39,6 +39,6 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun logout() {
-        TODO("Not yet implemented")
+        sharedPreferences.edit().remove(CRAFT_BID_JWT_TOKEN).apply()
     }
 }
