@@ -16,7 +16,7 @@ class OfferListRepositoryImpl @Inject constructor(
 ): OfferListRepository {
     override suspend fun getOfferList(filter: FilterParams?): ResponseResult<List<OfferResponse>> {
         val queryParameters = mapOf(
-            "title" to (filter?.title ?: "2"),
+            "title" to (filter?.title ?: ""),
             "advertiserSurname" to filter?.advertiserSurname,
             "winnerName" to filter?.winnerName,
             "tags" to filter?.tags?.joinToString(","),
@@ -25,7 +25,9 @@ class OfferListRepositoryImpl @Inject constructor(
             "pageNumber" to filter?.pageable?.pageNumber,
             "pageSize" to filter?.pageable?.pageSize
         ).filterValues { it != null }
+
         return try {
+            //val response = api.getOfferList(queryParameters)
             val response = api.getOfferList()
 
             if (response.isSuccessful && response.body() != null) {
@@ -34,7 +36,7 @@ class OfferListRepositoryImpl @Inject constructor(
                 ResponseResult.Error(UserNotAuthenticatedException())
             }
         } catch (e: Throwable) {
-            ResponseResult.Error(IOException("Error logging in", e))
+            ResponseResult.Error(IOException("Error getting offer list", e))
         }
     }
 }

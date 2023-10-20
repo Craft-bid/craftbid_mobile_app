@@ -1,6 +1,6 @@
 package com.pl.craftbidapp.data
 
-import com.example.craftbidkotlin.ui.offerList.OfferListElement
+import com.pl.craftbidapp.ui.offerList.OfferListElement
 import java.util.Date
 
 class OfferResponse(
@@ -12,7 +12,7 @@ class OfferResponse(
     val description: String,
     val photos: List<String>,
     val bids: List<Bid>,
-    val tags: List<Tag>, // Assuming Tag is a data class or type you've defined
+    val tags: List<Tag>,
     val advertiserId: Long,
     val winnerId: Long,
     val avgBid: Double

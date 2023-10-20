@@ -1,4 +1,4 @@
-package com.example.craftbidkotlin.ui.offerList
+package com.pl.craftbidapp.ui.offerList
 
 data class OfferListElement(
     val id: Long,
@@ -6,5 +6,4 @@ data class OfferListElement(
     val avgBid: Double,
     val bids:Int,
     val photos: List<String>
-
 )
