@@ -41,6 +41,7 @@ class LoginViewModel @Inject constructor(
                     setLoggedIn(true)
                     _loginResult.value =
                         LoginResult(success = LoggedInUserView(displayName = result.data.token))
+                    authRepository.saveToken(result.data.token)
                 } else {
                     _loginResult.value = LoginResult(error = R.string.login_failed)
                 }

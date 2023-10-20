@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import com.pl.craftbidapp.domain.repository.MyRepository
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,7 +23,7 @@ class MyService: Service() {
 
     fun essa() {
         GlobalScope.launch {
-            val response = repository.doNetworkCall()
+            val response = repository.helloWorld()
             println(response)
         }
     }

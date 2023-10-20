@@ -4,5 +4,5 @@ import com.pl.craftbidapp.data.ResponseResult
 import com.pl.craftbidapp.data.remote.HelloWorldResponse
 
 interface MyRepository {
-    suspend fun doNetworkCall(): ResponseResult<HelloWorldResponse>
+    suspend fun helloWorld(): ResponseResult<HelloWorldResponse>
 }

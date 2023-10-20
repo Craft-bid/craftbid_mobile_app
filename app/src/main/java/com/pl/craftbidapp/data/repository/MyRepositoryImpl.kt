@@ -20,7 +20,7 @@ class MyRepositoryImpl @Inject constructor(
         println("Hello from the repository. The app name is $appName")
     }
 
-    override suspend fun doNetworkCall(): ResponseResult<HelloWorldResponse> {
+    override suspend fun helloWorld(): ResponseResult<HelloWorldResponse> {
         return try {
             val response = api.helloWorld()
 
