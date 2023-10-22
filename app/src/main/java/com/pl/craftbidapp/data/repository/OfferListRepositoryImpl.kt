@@ -28,7 +28,7 @@ class OfferListRepositoryImpl @Inject constructor(
 
         return try {
             //val response = api.getOfferList(queryParameters)
-            val response = api.getOfferList()
+            val response = api.getOfferList(queryParameters)
 
             if (response.isSuccessful && response.body() != null) {
                 ResponseResult.Success(response.body()!!)
