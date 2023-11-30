@@ -6,6 +6,7 @@ import com.pl.craftbidapp.data.CRAFT_BID_BASE_URL
 import com.pl.craftbidapp.data.AuthInterceptor
 import com.pl.craftbidapp.data.remote.AuthApi
 import com.pl.craftbidapp.data.remote.MyApi
+import com.pl.craftbidapp.data.remote.OfferListApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,6 +44,16 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOfferListApi(): OfferListApi {
+        return Retrofit.Builder()
+            .baseUrl(CRAFT_BID_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(OfferListApi::class.java)
     }
 
     @Singleton

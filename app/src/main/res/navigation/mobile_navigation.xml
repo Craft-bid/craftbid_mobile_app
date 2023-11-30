@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_offerList">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.pl.craftbidapp.ui.home.HomeFragment"
+        android:id="@+id/navigation_offerList"
+        android:name="com.pl.craftbidapp.ui.offerList.OfferListFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_offer_list" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +22,8 @@
         android:name="com.pl.craftbidapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_myofferList"
+        android:name="com.pl.craftbidapp.ui.myOfferList.MyOfferListFragment"
+        android:label="My Offers" />
 </navigation>
