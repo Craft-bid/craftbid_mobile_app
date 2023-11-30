@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pl.craftbidapp.databinding.ListPartBinding
+import com.squareup.picasso.Picasso
+
 
 class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.OfferViewHolder>() {
 
@@ -30,10 +32,16 @@ class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.OfferViewHolder>(
     }
 
     inner class OfferViewHolder(private val binding: ListPartBinding) : RecyclerView.ViewHolder(binding.root) {
+
+
         fun bind(offerListElement: OfferListElement) {
             binding.offerTitle.text = offerListElement.title
             binding.offerCreator.text = offerListElement.avgBid.toString()
             binding.offerPrice.text = offerListElement.bids.toString()
+            if(offerListElement.photo.isNotEmpty()){
+                    Picasso.get().load(offerListElement.photo).into(binding.offerImage);
+                }
         }
     }
+
 }

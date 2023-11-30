@@ -5,5 +5,5 @@ data class OfferListElement(
     val title: String,
     val avgBid: Double,
     val bids:Int,
-    val photos: List<String>
+    val photo: String,
 )
