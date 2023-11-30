@@ -2,7 +2,7 @@ package com.pl.craftbidapp.data
 
 
 class FilterParams(val title: String? = null,
-                   val advertiserSurname: String? = null,
+                   val advertiserName: String? = null,
                    val winnerName: String? = null,
                    val tags: List<String>? = null,
                    val minPrice: Double? = null,

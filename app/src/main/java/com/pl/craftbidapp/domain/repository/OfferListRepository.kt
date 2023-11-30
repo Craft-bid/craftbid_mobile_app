@@ -6,4 +6,5 @@ import com.pl.craftbidapp.data.ResponseResult
 
 interface OfferListRepository {
     suspend fun getOfferList(filter: FilterParams?): ResponseResult<List<OfferResponse>>
+    suspend fun getUserOffers(email: String): ResponseResult<List<OfferResponse>>
 }

@@ -134,6 +134,7 @@ class LoginFragment @Inject constructor(): Fragment() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
+
         // TODO : initiate successful logged in experience
         Toast.makeText(
             application,
