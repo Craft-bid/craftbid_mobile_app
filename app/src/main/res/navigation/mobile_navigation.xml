@@ -9,7 +9,9 @@
         android:id="@+id/navigation_offerList"
         android:name="com.pl.craftbidapp.ui.offerList.OfferListFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_offer_list" />
+        tools:layout="@layout/fragment_offer_list"
+        android:background="#F1F1F1"
+        />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -25,5 +27,6 @@
     <fragment
         android:id="@+id/navigation_myofferList"
         android:name="com.pl.craftbidapp.ui.myOfferList.MyOfferListFragment"
-        android:label="My Offers" />
+        android:label="My Offers"
+        android:background="#F1F1F1"/>
 </navigation>
