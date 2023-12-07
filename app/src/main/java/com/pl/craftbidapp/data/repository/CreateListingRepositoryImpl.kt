@@ -16,7 +16,6 @@ class CreateListingRepositoryImpl @Inject constructor(
     override suspend fun createListing(createListingRequest: CreateListingRequest): ResponseResult<CreateListingResponse> {
                 return try {
                     val response = api.createListing(createListingRequest)
-                    println("Request: ${response.raw().body.toString()}")
                     if (response.isSuccessful && response.body() != null) {
                         System.out.println("success")
                         ResponseResult.Success(response.body()!!)
