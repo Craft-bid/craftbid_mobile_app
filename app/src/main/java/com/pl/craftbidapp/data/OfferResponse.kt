@@ -22,7 +22,6 @@ class OfferResponse(
     val advertiserId: Long,
     val winnerId: Long,
     val avgBid: Double
-
 )
 fun OfferResponse.toOfferListElement() : OfferListElement {
     if (photos.isEmpty()) {

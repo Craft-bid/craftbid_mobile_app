@@ -29,4 +29,15 @@
         android:name="com.pl.craftbidapp.ui.myOfferList.MyOfferListFragment"
         android:label="My Offers"
         android:background="#F1F1F1"/>
+
+    <fragment
+        android:id="@+id/navigation_offerDetails"
+        android:name="com.pl.craftbidapp.ui.offerDetails.OfferDetailsFragment"
+        android:label="Offer Details"
+        tools:layout="@layout/fragment_offer">
+        <argument
+            android:name="offer_id"
+            app:argType="long" />
+    </fragment>
+
 </navigation>

@@ -53,4 +53,18 @@ class OfferListRepositoryImpl @Inject constructor(
             ResponseResult.Error(IOException("Error getting offer list", e))
         }
     }
+
+    override suspend fun getOffer(id: Long): ResponseResult<OfferResponse> {
+        return try {
+            val response = api.getOffer(id)
+
+            if (response.isSuccessful && response.body() != null) {
+                ResponseResult.Success(response.body()!!)
+            } else {
+                ResponseResult.Error(UserNotAuthenticatedException())
+            }
+        } catch (e: Throwable) {
+            ResponseResult.Error(IOException("Error getting offer", e))
+        }
+    }
 }

@@ -13,4 +13,7 @@ interface OfferListApi {
 
     @GET("api/v1/public/users/offers/{email}")
     suspend fun getUserOffers(@Path("email") email: String): Response<List<OfferResponse>>
+
+    @GET("api/v1/public/listings/{id}")
+    suspend fun getOffer(@Path("id") id: Long): Response<OfferResponse>
 }

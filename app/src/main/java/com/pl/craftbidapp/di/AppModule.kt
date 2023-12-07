@@ -48,9 +48,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOfferListApi(): OfferListApi {
+    fun provideOfferListApi(authInterceptor: AuthInterceptor): OfferListApi {
         return Retrofit.Builder()
             .baseUrl(CRAFT_BID_BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(authInterceptor)
+                    .build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(OfferListApi::class.java)
