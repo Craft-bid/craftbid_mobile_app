@@ -2,7 +2,11 @@ package com.pl.craftbidapp.ui.createListing;
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +17,9 @@ import androidx.fragment.app.viewModels
 import com.pl.craftbidapp.databinding.FragmentCreateListingBinding
 import com.pl.craftbidapp.ui.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 @AndroidEntryPoint
 class CreateListingFragment : Fragment() {
@@ -61,6 +68,42 @@ class CreateListingFragment : Fragment() {
             val selectedImageUri = data?.data
             binding.photoImageView.setImageURI(selectedImageUri)
             binding.photoTextView.isInvisible = true
+
+            selectedImageUri?.let { uri ->
+                val bitmap = getBitmapFromUri(uri)
+                saveBitmapToFile(bitmap)
+            }
+        }
+    }
+    private fun getBitmapFromUri(uri: Uri): Bitmap? {
+        return try {
+            val inputStream = requireActivity().contentResolver.openInputStream(uri)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun saveBitmapToFile(bitmap: Bitmap?) {
+        bitmap?.let {
+            val directory = File(requireContext().filesDir, "images")
+            if (!directory.exists()) {
+                directory.mkdirs()
+            }
+
+            val fileName = "temp.jpg"
+            val file = File(directory, fileName)
+
+            try {
+                val fileOutputStream = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+                fileOutputStream.flush()
+                fileOutputStream.close()
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 
