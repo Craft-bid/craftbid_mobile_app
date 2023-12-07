@@ -8,20 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.pl.craftbidapp.databinding.FragmentCreateListingBinding
+import com.pl.craftbidapp.ui.login.LoginViewModel
 
 class CreateListingFragment : Fragment() {
     private var _binding: FragmentCreateListingBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var createListingViewModel: CreateListingViewModel
+    private val createListingViewModel: CreateListingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        createListingViewModel =
-            ViewModelProvider(this)[CreateListingViewModel::class.java]
 
         _binding = FragmentCreateListingBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -36,6 +35,8 @@ class CreateListingFragment : Fragment() {
 
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
