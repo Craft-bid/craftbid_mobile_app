@@ -10,13 +10,14 @@ import androidx.lifecycle.viewModelScope
 import com.pl.craftbidapp.data.CRAFT_BID_JWT_TOKEN
 import com.pl.craftbidapp.data.ResponseResult
 import com.pl.craftbidapp.domain.repository.CreateListingRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.Base64
 import javax.inject.Inject
 
+@HiltViewModel
 class CreateListingViewModel @Inject constructor(
-    private val listingRepository: CreateListingRepository,
     private val createListingRepository: CreateListingRepository,
     private val application: Application,
     private val sharedPreferences: SharedPreferences

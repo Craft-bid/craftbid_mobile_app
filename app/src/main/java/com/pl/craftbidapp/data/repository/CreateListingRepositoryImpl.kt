@@ -12,23 +12,21 @@ import javax.inject.Inject
 
 class CreateListingRepositoryImpl @Inject constructor(
     private val api: CreateListingApi,
-    private val appContext: Application
 ): CreateListingRepository {
     override suspend fun createListing(createListingRequest: CreateListingRequest): ResponseResult<CreateListingResponse> {
                 return try {
-                    val createParameters = mapOf(
-                        "title" to createListingRequest.title,
-                        "description" to createListingRequest.description,
-                        "advertiserId" to createListingRequest.advertiserId,
-                        "ended" to createListingRequest.ended
-                    )
-                    val response = api.createListing(createParameters)
+                    val response = api.createListing(createListingRequest)
+                    println("Request: ${response.raw().body.toString()}")
                     if (response.isSuccessful && response.body() != null) {
+                        System.out.println("success")
                         ResponseResult.Success(response.body()!!)
                     } else {
+                        System.out.println("failed")
                         ResponseResult.Error(UserNotAuthenticatedException())
                     }
                 } catch (e: Throwable) {
+                    System.out.println("error logging in")
+                    e.printStackTrace()
                     ResponseResult.Error(IOException("Error logging in", e))
                 }
     }

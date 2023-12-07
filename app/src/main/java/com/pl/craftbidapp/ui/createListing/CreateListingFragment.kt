@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.pl.craftbidapp.databinding.FragmentCreateListingBinding
 import com.pl.craftbidapp.ui.login.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateListingFragment : Fragment() {
     private var _binding: FragmentCreateListingBinding? = null
     private val binding get() = _binding!!
@@ -35,8 +37,6 @@ class CreateListingFragment : Fragment() {
 
         return root
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
