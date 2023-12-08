@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pl.craftbidapp.data.FilterParams
 import com.pl.craftbidapp.data.OfferResponse
 import com.pl.craftbidapp.data.ResponseResult
 import com.pl.craftbidapp.data.toOfferListElement
@@ -25,9 +26,9 @@ class OfferListViewModel @Inject constructor(
     private val _offerListElementList = MutableLiveData<List<OfferListElement>>()
     val offerListElementList: LiveData<List<OfferListElement>> get() = _offerListElementList
 
-    init {
+    fun search(query: String?) {
         viewModelScope.launch {
-            val offerListResponse = offerListRepository.getOfferList(null)
+            val offerListResponse = offerListRepository.getOfferList(FilterParams(query))
             val offerListElementList = mutableListOf<OfferListElement>()
             if (offerListResponse is ResponseResult.Success) {
                 for (offer: OfferResponse in offerListResponse.data) {
@@ -35,6 +36,11 @@ class OfferListViewModel @Inject constructor(
                 }
             }
             _offerListElementList.value = offerListElementList
+        }
+    }
+    init {
+        viewModelScope.launch {
+            search(null)
         }
 
     }

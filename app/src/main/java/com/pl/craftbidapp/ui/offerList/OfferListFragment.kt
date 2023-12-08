@@ -32,6 +32,9 @@ class OfferListFragment : Fragment() {
 
         _binding = FragmentOfferListBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.search.setOnClickListener {
+            offerListViewModel.search(binding.search.query.toString())
+        }
 
         recyclerView = binding.list
         val navController = findNavController()
