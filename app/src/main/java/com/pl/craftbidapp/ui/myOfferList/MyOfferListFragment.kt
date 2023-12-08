@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pl.craftbidapp.databinding.FragmentMyofferListBinding
@@ -35,7 +36,8 @@ class MyOfferListFragment : Fragment() {
         val root: View = binding.root
 
         recyclerView = binding.list
-        adapter = OfferListAdapter()
+        val navController = findNavController()
+        adapter = OfferListAdapter(navController)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         myOfferViewModel.favListElementList.observe(viewLifecycleOwner) { favs ->
