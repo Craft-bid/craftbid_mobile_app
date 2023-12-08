@@ -106,35 +106,45 @@
             android:paddingHorizontal="16dp"
             android:text="Bids"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/averageBidPrice"
+            android:textStyle="bold" />
+<!--        Create horizontal linearlayout with 2 textviews-->
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:layout_marginTop="8dp"
-            android:layout_height="wrap_content"
-            android:text="Average Bid Price: " />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/averageBidPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Average Bid Price: " />
+            <TextView
+                android:id="@+id/averageBidPriceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:orientation="vertical"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="16dp">
 
             <EditText
                 android:id="@+id/yourBidPrice"
+                android:paddingHorizontal="16dp"
                 android:layout_width="match_parent"
-                android:padding="16dp"
                 android:layout_height="wrap_content"
                 android:hint="Your bid price"
                 android:inputType="numberDecimal"/>
 
             <EditText
                 android:id="@+id/yourBidDescription"
-                android:padding="16dp"
+                android:paddingHorizontal="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Description"
@@ -142,7 +152,7 @@
 
             <EditText
                 android:id="@+id/yourBidDaysToDeliver"
-                android:padding="16dp"
+                android:paddingHorizontal="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Days to deliver"
@@ -150,11 +160,10 @@
 
             <Button
                 android:id="@+id/submitBidButton"
-                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Submit Bid"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="80dp"
                 />
         </LinearLayout>

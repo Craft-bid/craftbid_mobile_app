@@ -45,6 +45,7 @@ class OfferDetailsFragment : Fragment() {
         offerDetailsViewModel.OfferDetailsData.observe(viewLifecycleOwner) {
             binding.title.text = it.title
             binding.description.text = it.description
+            binding.averageBidPriceValue.text = it.avgBid.toString()
 
             val photoAdapter = PhotoAdapter(it.photos)
             binding.photoViewPager.adapter = photoAdapter
