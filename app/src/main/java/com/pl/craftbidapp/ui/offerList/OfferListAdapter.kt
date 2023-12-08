@@ -2,8 +2,10 @@ package com.pl.craftbidapp.ui.offerList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.pl.craftbidapp.R
 import com.pl.craftbidapp.databinding.ListPartBinding
 import com.squareup.picasso.Picasso
 
@@ -37,9 +39,9 @@ class OfferListAdapter(private val navController: NavController) : RecyclerView.
 
         fun bind(offerListElement: OfferListElement) {
             binding.root.setOnClickListener {
-//                val action = R.id.navigation_offerDetails
-//                val bundle = bundleOf("offer_id" to offerListElement.id)
-//                navController.navigate(action, bundle)
+                val action = R.id.navigation_offerDetails
+                val bundle = bundleOf("offer_id" to offerListElement.id)
+                navController.navigate(action, bundle)
             }
             binding.offerTitle.text = offerListElement.title
             binding.offerCreator.text = offerListElement.avgBid.toString()
