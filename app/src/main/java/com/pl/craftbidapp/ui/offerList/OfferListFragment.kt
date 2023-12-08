@@ -35,9 +35,7 @@ class OfferListFragment : Fragment() {
         val root: View = binding.root
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let {
-                    offerListViewModel.search(it)
-                }
+                offerListViewModel.search(query)
                 return true
             }override fun onQueryTextChange(newText: String): Boolean {
                 return true

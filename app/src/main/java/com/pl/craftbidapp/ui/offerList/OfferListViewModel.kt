@@ -27,6 +27,7 @@ class OfferListViewModel @Inject constructor(
     val offerListElementList: LiveData<List<OfferListElement>> get() = _offerListElementList
 
     fun search(query: String?) {
+        System.out.println("query: "+query)
         viewModelScope.launch {
             val offerListResponse = offerListRepository.getOfferList(FilterParams(query))
             val offerListElementList = mutableListOf<OfferListElement>()
