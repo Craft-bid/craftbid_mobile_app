@@ -64,8 +64,6 @@ class OfferDetailsFragment : Fragment() {
             TabLayoutMediator(binding.tabDots, binding.photoViewPager) { tab, position ->
                 // Tutaj możesz dostosować wygląd każdej zakładki, jeśli potrzebujesz
             }.attach()
-
-            Toast.makeText(context, "Fill the view with data", Toast.LENGTH_LONG).show()
         }
 
         return root
