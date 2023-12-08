@@ -38,6 +38,9 @@ class OfferListFragment : Fragment() {
                 offerListViewModel.search(query)
                 return true
             }override fun onQueryTextChange(newText: String): Boolean {
+                if(newText.length==0) {
+                    offerListViewModel.search(null)
+                }
                 return true
             }
 
