@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.text.Editable
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -38,12 +39,12 @@ class CreateListingViewModel @Inject constructor(
             try {
                 val userId = sharedPreferences.getLong("user_id", 0)
                 val result = createListingRepository.createListing(CreateListingRequest(title, description, userId, false))
-
+                Log.d("after createListing", "result: $result")
                 if (result is ResponseResult.Success) {
                     Toast.makeText(application, "Listing created successfully", Toast.LENGTH_SHORT).show()
-                    val listingId = result.data.data?.let { JSONObject(it).getLong("id") }
+                    val listingId = result.data.id
                     sharedPreferences.edit().putLong("listing_id", listingId!!).apply()
-                    _createListingResult.value = CreateListingResponse(data = "Listing created successfully")
+                    _createListingResult.value = CreateListingResponse(title = "Listing created successfully")
                 } else {
                     _createListingResult.value = CreateListingResponse(error = -1)
                 }
@@ -62,13 +63,13 @@ class CreateListingViewModel @Inject constructor(
                 val imageFile = File(application.filesDir, "images/temp.jpg")
 
                 val imageByteArray = imageFile.readBytes()
-                val imagePart = imageByteArray.toMultipart("photo")
+                val imagePart = imageByteArray.toMultipart("photos")
                 val result = createListingRepository.addPhotosToListing(listingId, listOf(imagePart))
 
 
                 if (result is ResponseResult.Success) {
                     Toast.makeText(application, "Photo added successfully", Toast.LENGTH_SHORT).show()
-                    _createListingResult.value = CreateListingResponse(data = "Photo added successfully")
+                    _createListingResult.value = CreateListingResponse(title = "Photo added successfully")
                 } else {
                     _createListingResult.value = CreateListingResponse(error = -1)
                 }

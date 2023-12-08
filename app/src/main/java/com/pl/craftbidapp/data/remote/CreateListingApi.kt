@@ -15,9 +15,9 @@ interface CreateListingApi {
     suspend fun createListing(@Body createListingRequest: CreateListingRequest): Response<CreateListingResponse>
 
     @Multipart
-    @POST("/private/{listingId}/photos")
+    @POST("/api/v1/private/{listingId}/photos")
     suspend fun addPhotosToListing(
-        @Part("listingId") listingId: Long,
+        @retrofit2.http.Path("listingId") listingId: Long,
         @Part photos: List<MultipartBody.Part>
     ): Response<CreateListingResponse>
 }
