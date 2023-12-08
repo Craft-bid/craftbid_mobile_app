@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.security.keystore.UserNotAuthenticatedException
 import com.pl.craftbidapp.data.CRAFT_BID_JWT_TOKEN
 import com.pl.craftbidapp.data.LoggedInUser
+import com.pl.craftbidapp.data.RegisterRequest
 import com.pl.craftbidapp.data.ResponseResult
 import com.pl.craftbidapp.data.remote.AuthApi
 import com.pl.craftbidapp.data.remote.LoginRequest
@@ -28,6 +29,23 @@ class AuthRepositoryImpl @Inject constructor(
             ResponseResult.Error(IOException("Error logging in", e))
         }
 
+    }
+
+    override suspend fun register(
+        name: String,
+        email: String,
+        password: String
+    ): ResponseResult<LoggedInUser> {
+        return try {
+            val response = api.register(RegisterRequest(name, email, password))
+            if (response.isSuccessful && response.body() != null) {
+                ResponseResult.Success(response.body()!!)
+            } else {
+                ResponseResult.Error(UserNotAuthenticatedException())
+            }
+        } catch (e: Throwable) {
+            ResponseResult.Error(IOException("Error logging in", e))
+        }
     }
 
     override fun getToken(): String? {

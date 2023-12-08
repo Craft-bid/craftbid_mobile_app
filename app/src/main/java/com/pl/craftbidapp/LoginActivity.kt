@@ -14,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), OnSwitchListener {
     @Inject
     @Named("hello2")
     lateinit var hello: String
@@ -41,9 +41,10 @@ class LoginActivity : AppCompatActivity() {
                 .commit()
         }
 
-        findViewById<Button>(R.id.buttonSwitch).setOnClickListener {
-            switchFragment()
-        }
+    }
+
+    override fun onSwitch() {
+        switchFragment()
     }
 
     private fun switchFragment() {
