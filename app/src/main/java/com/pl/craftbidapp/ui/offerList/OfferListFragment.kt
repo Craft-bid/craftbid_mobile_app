@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -32,6 +33,15 @@ class OfferListFragment : Fragment() {
 
         _binding = FragmentOfferListBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                offerListViewModel.search(query)
+                return true
+            }override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+
+        })
 
         recyclerView = binding.list
         val navController = findNavController()
