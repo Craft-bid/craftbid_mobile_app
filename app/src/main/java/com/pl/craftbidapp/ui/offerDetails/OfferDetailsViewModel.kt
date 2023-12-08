@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pl.craftbidapp.data.OfferResponse
 import com.pl.craftbidapp.data.ResponseResult
+import com.pl.craftbidapp.domain.repository.BidRepository
 import com.pl.craftbidapp.domain.repository.OfferListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope

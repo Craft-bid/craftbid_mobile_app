@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
-import com.pl.craftbidapp.databinding.FragmentDashboardBinding
-import com.pl.craftbidapp.databinding.FragmentMyofferListBinding
 import com.pl.craftbidapp.databinding.FragmentOfferBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,6 +24,8 @@ class OfferDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val offerDetailsViewModel: OfferDetailsViewModel by viewModels()
+
+    private val bidViewModel: BidViewModel by viewModels()
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences;
@@ -66,7 +67,42 @@ class OfferDetailsFragment : Fragment() {
             }.attach()
         }
 
+        initBidSection(offerId!!)
+
         return root
+    }
+
+    private fun initBidSection(offerId: Long) {
+        val bidPriceEditText = binding.yourBidPrice
+        val bidDescriptionEditText = binding.yourBidDescription
+        val bidDaysToDeliverEditText = binding.yourBidDaysToDeliver
+        val submitButton = binding.submitBidButton
+
+        bidViewModel.listingId.value = offerId
+
+        bidPriceEditText.addTextChangedListener {
+            bidViewModel.bidPrice.value = it.toString()
+        }
+
+        bidDescriptionEditText.addTextChangedListener {
+            bidViewModel.bidDescription.value = it.toString()
+        }
+
+        bidDaysToDeliverEditText.addTextChangedListener {
+            bidViewModel.bidDaysToDeliver.value = it.toString()
+        }
+
+        submitButton.setOnClickListener {
+            bidViewModel.submitBid()
+        }
+
+        bidViewModel.OfferDetailsData.observe(viewLifecycleOwner) {
+            // clear fields
+            bidPriceEditText.text.clear()
+            bidDescriptionEditText.text.clear()
+            bidDaysToDeliverEditText.text.clear()
+            Toast.makeText(context, "Your bid has been added", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {

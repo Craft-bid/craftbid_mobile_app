@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.pl.craftbidapp.data.CRAFT_BID_BASE_URL
 import com.pl.craftbidapp.data.AuthInterceptor
 import com.pl.craftbidapp.data.remote.AuthApi
+import com.pl.craftbidapp.data.remote.BidApi
 import com.pl.craftbidapp.data.remote.MyApi
 import com.pl.craftbidapp.data.remote.OfferListApi
 import dagger.Module
@@ -34,6 +35,20 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MyApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBidApi(authInterceptor: AuthInterceptor): BidApi {
+        return Retrofit.Builder()
+            .baseUrl(CRAFT_BID_BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(authInterceptor)
+                    .build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(BidApi::class.java)
     }
 
     @Provides
