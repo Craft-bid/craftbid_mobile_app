@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.pl.craftbidapp.data.CRAFT_BID_BASE_URL
 import com.pl.craftbidapp.data.AuthInterceptor
 import com.pl.craftbidapp.data.remote.AuthApi
+import com.pl.craftbidapp.data.remote.CreateListingApi
 import com.pl.craftbidapp.data.remote.BidApi
 import com.pl.craftbidapp.data.remote.MyApi
 import com.pl.craftbidapp.data.remote.OfferListApi
@@ -73,6 +74,20 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(OfferListApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateListingApi(authInterceptor: AuthInterceptor): CreateListingApi {
+        return Retrofit.Builder()
+            .baseUrl(CRAFT_BID_BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(authInterceptor)
+                    .build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CreateListingApi::class.java)
     }
 
     @Singleton

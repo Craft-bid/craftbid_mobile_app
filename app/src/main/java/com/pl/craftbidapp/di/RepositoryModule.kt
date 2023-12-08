@@ -1,6 +1,11 @@
 package com.pl.craftbidapp.di
 
 import com.pl.craftbidapp.data.repository.AuthRepositoryImpl
+import com.pl.craftbidapp.data.repository.CreateListingRepositoryImpl
+import com.pl.craftbidapp.data.repository.MyRepositoryImpl
+import com.pl.craftbidapp.data.repository.OfferListRepositoryImpl
+import com.pl.craftbidapp.domain.repository.AuthRepository
+import com.pl.craftbidapp.domain.repository.CreateListingRepository
 import com.pl.craftbidapp.data.repository.BidRepositoryImpl
 import com.pl.craftbidapp.data.repository.MyRepositoryImpl
 import com.pl.craftbidapp.data.repository.OfferListRepositoryImpl
@@ -36,6 +41,12 @@ abstract class RepositoryModule {
         offerListRepositoryImpl: OfferListRepositoryImpl
     ): OfferListRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindCreateListingRepository(
+        createListingRepositoryImpl: CreateListingRepositoryImpl
+    ): CreateListingRepository
+ 
     @Binds
     @Singleton
     abstract fun bindBidRepository(

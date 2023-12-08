@@ -43,9 +43,9 @@ class DashboardFragment : Fragment() {
         }
 
         val fetchHelloWorldBtn = binding.fetchHelloWorldBtn
-        fetchHelloWorldBtn.setOnClickListener({
+        fetchHelloWorldBtn.setOnClickListener {
             dashboardViewModel.fetchHelloWorld()
-        })
+        }
         dashboardViewModel.helloWorldMessage.observe(viewLifecycleOwner) {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         }
