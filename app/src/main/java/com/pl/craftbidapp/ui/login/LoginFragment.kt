@@ -1,6 +1,7 @@
 package com.pl.craftbidapp.ui.login
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -13,10 +14,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.pl.craftbidapp.MainActivity
+import com.pl.craftbidapp.OnSwitchListener
 import com.pl.craftbidapp.R
 import com.pl.craftbidapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -123,7 +126,20 @@ class LoginFragment @Inject constructor(): Fragment() {
             }
         }
 
+        val switchButton = binding.register
+        switchButton.setOnClickListener {
+            switchListener?.onSwitch()
+        }
+
         return root
+    }
+
+    private var switchListener: OnSwitchListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        switchListener = context as? OnSwitchListener
+            ?: throw ClassCastException("$context must implement OnSwitchListener")
     }
 
     override fun onDestroyView() {

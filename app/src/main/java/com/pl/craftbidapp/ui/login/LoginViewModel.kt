@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is login Fragment"
+        value = "Login to CraftBid"
     }
     val text: LiveData<String> = _text
 
