@@ -20,7 +20,7 @@ class RegisterViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is register Fragment"
+        value = "Register to CraftBid"
     }
     val text: LiveData<String> = _text
 
